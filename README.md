@@ -1,15 +1,15 @@
 # logseq-vim-mode
 A better set of vim keybindings in logseq
 
-## Logic
+## Vim -> Logseq Translation Rules
 
- - ctrl+key commands are vim commands - performing them in vim without ctrl has a near identical effect
- - alt+key commands are best effort vimmish - the effect or key combo is analogous to vim when that applies
+Where possible, vim commands are copied directly (e.g. zc to close a fold). If the command needs to exist during editing mode, add a ctrl+command options (e.g. ctrl+z ctrl+c). If the command has ctrl in vim, keep that in logseq.
 
-## Exceptions
+For commands that don't have a direct vim equivalent or where conflicts exist, use something similar (e.g. ctrl+shift+; for the command pallette, reminiscent of vim ":"). These are labeled with LIKE in a comment.
 
+## Quirks
 
- - Toggle commands left alone for now
- - Moving blocks comes from the [recommendation in the wiki](https://vim.fandom.com/wiki/Moving_lines_up_or_down)
- - Go to home is slanted bash (ctrl + ~)
- - I don't use journals, so it was disabled to make room for block moving
+Some commands are personal preferences. They are labeled with P, with an explanation of why I like it.
+
+The commands "g h" and "h" interfere if you go to your homepage while a block is selected, so I've added "g shift+`" as a way to go home.
+
