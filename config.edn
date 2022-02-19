@@ -1,74 +1,101 @@
 :shortcuts {
- ;; Basics
- :editor/indent "shift+ctrl+.", ;; LIKE >>, not using >> to be consistent with /outdent
- :editor/outdent "shift+ctrl+,", ;; LIKE <<, cannot use << because of autocomplete
- :editor/select-all-blocks "shift+%", ;; LIKE of :%<command>
- :go/search ["ctrl+alt+/" "alt+/"], ;; LIKE search, but alternative
- :go/search-in-page ["ctrl+/" "/"],
- :editor/undo ["ctrl+u" "u"]
- :editor/redo "ctrl+r",
- :editor/copy ["ctrl+y" "y"],
+ ;; Basics ;;
+ ;; /outdent conflicts with < autocomplete
+ :editor/indent            "shift+ctrl+."
+ :editor/outdent           "shift+ctrl+,"
+ ;; VIMISH comes from :%<command> to perform an action on entire buffer
+ :editor/select-all-blocks "shift+%"
+ ;; VIMISH comes from / to search
+ :go/search               ["ctrl+alt+/" "alt+/"]
+ :go/search-in-page       ["ctrl+/" "/"]
+ :editor/undo             ["ctrl+u" "u"]
+ :editor/redo              "ctrl+r"
+ :editor/copy             ["ctrl+y" "y"]
+ :editor/cut              ["ctrl+x" "x"]
 
- ;; Navigation
- :editor/up ["ctrl+k" "k" "up"],
- :editor/down ["ctrl+j" "j" "down"],
- :editor/right ["ctrl+l" "l" "right"],
- :editor/left ["ctrl+h" "h" "left"],
- :editor/collapse-block-children ["ctrl+z ctrl+c" "z c"],
- :editor/expand-block-children ["ctrl+z ctrl+o" "z o"],
- :editor/toggle-open-blocks "t z",
- :go/backward "ctrl+o",
- :go/forward "ctrl+i",
- :go/home ["g h" "g shift+~"], ;; leaving g h, but it inferes with editor/left when on a line, so add g ~
+ ;; Navigation ;;
+ :editor/up                      ["ctrl+k" "k" "up"]
+ :editor/down                    ["ctrl+j" "j" "down"]
+ :editor/right                   ["ctrl+l" "l" "right"]
+ :editor/left                    ["ctrl+h" "h" "left"]
+ :editor/collapse-block-children ["ctrl+z ctrl+c" "z c"]
+ :editor/expand-block-children   ["ctrl+z ctrl+o" "z o"]
+ :editor/toggle-open-blocks       "t z"
+ :go/backward                     "ctrl+o"
+ :go/forward                      "ctrl+i"
+ ;; FIX g+h conflicts with h when in select mode, so g-~ also goes home
+ :go/home                        ["g h" "g shift+~"]
 
 
  ;; Block editing general
- :editor/cycle-todo "t t", ;; P it feels like toggling action doesn't it?
- :editor/follow-link "ctrl+]", ;; LIKE following a tag
- :editor/open-link-in-sidebar "ctrl+shift+]", ;; LIKE following a tag, and logseq uses shift for sidebar actions
- :editor/move-block-up "alt+k", ;; common vim adjustment
- :editor/move-block-down "alt+j", ;; common vim adjustment
+ ;; PERSONAL
+ :editor/cycle-todo           "space t"
+ ;; VIMISH comes from ctrl+] to follow a ctag
+ :editor/follow-link          "ctrl+]"
+ ;; VIMISH comes from ctrl+] to follow a tag, with shift for sidebar
+ :editor/open-link-in-sidebar "ctrl+shift+]"
+ ;; comes from [vim fandom](https://vim.fandom.com/wiki/Moving_lines_up_or_down)
+ :editor/move-block-up        "alt+k"
+ :editor/move-block-down      "alt+j"
 
- ;; Block command editing
- :editor/clear-block "ctrl+d ctrl+d",
- :editor/kill-line-before "ctrl+d ctrl+0",
- :editor/kill-line-after "ctrl+d ctrl+4",
- :editor/beginning-of-block "ctrl+0",
- :editor/end-of-block "ctrl+4", ;; like $, but shift was annoying to press
- :editor/forward-word "ctrl+w",
- :editor/backward-word "ctrl+b",
- :editor/forward-kill-word "ctrl+d ctrl+w",
- :editor/backward-kill-word "ctrl+d ctrl+b",
- :editor/replace-block-reference-at-point "ctrl+space ctrl+r", ;; P ctrl+space is my command prefix
+ ;; Block command editing ;;
+ :editor/clear-block                      "ctrl+d ctrl+d"
+ :editor/kill-line-before                 "ctrl+d ctrl+0"
+ :editor/kill-line-after                  "ctrl+d ctrl+4"
+ :editor/beginning-of-block               "ctrl+0"
+ ;; VIMISH comes from $, but shift+ctrl is hard to press
+ :editor/end-of-block                     "ctrl+4"
+ :editor/forward-word                     "ctrl+w"
+ :editor/backward-word                    "ctrl+b"
+ :editor/forward-kill-word                "ctrl+d ctrl+w"
+ :editor/backward-kill-word               "ctrl+d ctrl+b"
+ ;; PERSONAL
+ :editor/replace-block-reference-at-point "ctrl+space ctrl+r"
 
- ;; Block selection
- :editor/open-edit ["i" "enter"],
- :editor/select-block-up "shift+k", ;; P not vim-y, just comfortable
- :editor/select-block-down "shift+j", ;; P see above
- :editor/delete-selection ["backspace" "delete" "ctrl+d ctrl+d"],
+ ;; Block selection ;;
+ :editor/open-edit        ["i" "enter"]
+ ;; PERSONAL shift select is common, and more vimmish v+k/j didn't work
+ :editor/select-block-up   "shift+k"
+ :editor/select-block-down "shift+j"
+ :editor/delete-selection ["backspace" "delete" "ctrl+d ctrl+d"]
 
+ ;; Formatting ;;
+ ;; PERSONAL consistent formatting shortcuts
+ :editor/italics     "ctrl+shift+dash"
+ ;; FIX ctrl+h conflicts with movement
+ :editor/insert-link "ctrl+shift+open-square-bracket"
+ ;; PERSONAL consistent formatting shortcuts
+ :editor/highlight   "ctrl+shift+equals"
+ ;; FIX ctrl+l conflicts with movement
+ :editor/bold        "ctrl+shift+8"
 
- ;; Formatting ;; P just always use ctrl+<character used for formatting>
- :editor/italics "ctrl+shift+dash",
- :editor/insert-link "ctrl+shift+open-square-bracket",
- :editor/highlight "ctrl+shift+equals",
- :editor/bold "ctrl+shift+8",
+ ;; Toggle ;;
+ ;; PERSONAL keep toggling consistent
+ :ui/toggle-brackets      "t b"
+ ;; VIMISH comes from ctrl+w to do a window action and h/l for direction
+ :ui/toggle-left-sidebar  "w h"
+ :ui/toggle-right-sidebar "w l"
 
- ;; Toggle
- :ui/toggle-brackets "t b" ;; P consistent toggling
- :ui/toggle-theme "t h" ;; P to leave room for cycle-todo
+ ;; Others ;;
+ ;; VIMISH comes from : command prefix
+ :command-palette/toggle   "shift+ctrl+semicolon"
+ ;; PERSONAL
+ :sidebar/clear           ["space c" "ctrl+space ctrl+c"]
+ ;; PERSONAL
+ :sidebar/open-today-page ["space j" "ctrl+space ctrl+j"]
+ ;; PERSONAL
+ :search/re-index         ["space s" "ctrl+space ctrl+s"]
+ :auto-complete/next       "ctrl+n"
+ :auto-complete/prev       "ctrl+p"
+ ;; VIMISH hjkl motions in date picket
+ :date-picker/prev-day    ["ctrl+h" "left"]
+ :date-picker/next-day    ["ctrl+l" "right"]
+ :date-picker/prev-week   ["ctrl+k" "up"]
+ :date-picker/next-week   ["ctrl+j" "down"]
 
- ;; Others
- :command-palette/toggle "shift+ctrl+semicolon", ;; LIKE :
- :sidebar/clear "ctrl+space ctrl+c" ;; P space is my leader
- :sidebar/open-today-page "shift+g shift+j", ;; P I like shift being a sidebar action
- :search/re-index "ctrl+space ctrl+s", ;; P space is my leader
- :auto-complete/next "ctrl+n", ;; from vim autocomplete
- :auto-complete/prev "ctrl+p", ;; from vim autocomplete
- :date-picker/prev-day ["ctrl+h" "left"], ;; P vimmy motion
- :date-picker/next-day ["ctrl+l" "right"], ;; P vimmy motion
- :date-picker/prev-week ["ctrl+k" "up"], ;; P vimmy motion
- :date-picker/next-week ["ctrl+j" "down"], ;; P and finally, vimmy motion
- :git/commit "ctrl+space c" ;; it was interfering with z c
-
+ ;; Unlisted ;;
+ ;; FIX interference with zc
+ :git/commit                      "ctrl+space c"
+ ;; PERSONAL
+ :editor/open-file-in-default-app "space v"
 }
